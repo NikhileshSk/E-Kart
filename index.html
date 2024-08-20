@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>E-Kart</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h2>Welcome to E-Kart</h2>
+            <p>Your one-stop shop for the latest trends and styles.</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <h2>Featured Products</h2>
+        <div class="products-grid" id="result">
+            
+            </div>
+           
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>E-Kart is dedicated to providing the best shopping experience with the latest fashion trends.</p>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 E-Kart. All rights reserved.</p>
+    </footer>
+    <script>
+    fetch('https://dummyjson.com/products')
+    .then(response => response.json())
+    .then(data => displayContent(data.products)) // Use data.products to access the products array
+    .catch(error => console.error('Error fetching data:', error));
+
+    function displayContent(products) {
+        let htmlData = ''; // Declare htmlData outside the loop
+
+        for (let item of products) {
+            htmlData += `
+             <div class="product-card">
+                <img src="${item.thumbnail}" alt="${item.title}">
+                <h3>${item.title}</h3>
+                <p>$${item.price}</p>
+                <a href="#" class="btn">Buy Now</a>
+            </div>
+            `;
+        }
+        document.getElementById('result').innerHTML = htmlData; // Update the result element
+    }
+    </script>
+</body>
+</html>
